@@ -107,6 +107,7 @@ export const GamePage = () => {
   }, [socket]);
 
   const onCreateRoom = () => {
+    console.log("Sending createRoom event to the server", socket);
     socket.emit("createRoom");
   };
 

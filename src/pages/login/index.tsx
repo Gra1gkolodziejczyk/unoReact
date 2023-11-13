@@ -52,23 +52,25 @@ const LoginPage = () => {
               </h1>
 
               <div className="block mb-2 text-sm">
-                <label className="pl-1 font-font">Email </label>
+                <label className="pl-1 font-font" htmlFor="email">Email </label>
                 <br></br>
                 <input
                   className="font-font placeholder:italic placeholder:text-slate-400 bg-grey w-full rounded-2xl leading-7 pl-1"
                   type="text"
                   placeholder="Identifiant..."
+                  name="email"
                   value={credentials.email}
                   onChange={onChange}
                 />
               </div>
               <div className="block mb-2 text-sm">
-                <label className="pl-1 font-font">Mot de passe </label>
+                <label className="pl-1 font-font" htmlFor="password">Mot de passe </label>
                 <br></br>
                 <input
                   className="font-font placeholder:italic placeholder:text-slate-400 bg-grey w-full rounded-2xl leading-7 pl-1"
                   type="text"
                   placeholder="Mot de passe..."
+                  name="password"
                   value={credentials.password}
                   onChange={onChange}
                 />
@@ -80,7 +82,7 @@ const LoginPage = () => {
               </div>
               <div className="grblock mb-2 text-sm text-center">
                 <button className="text-orange font-font text-center p-2">
-                  <Link to={"/registration"}>Je n'ai pas de compte</Link>
+                  <Link to={"/register"}>Je n'ai pas de compte</Link>
                 </button>
               </div>
             </div>

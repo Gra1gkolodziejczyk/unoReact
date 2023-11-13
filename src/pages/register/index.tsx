@@ -10,10 +10,10 @@ const RegisterPage = () => {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = React.useState({
-    username: "",
-    email: "",
-    password: "",
-    passwordConfirm: "",
+    username: "toto",
+    email: "toto@toto.com",
+    password: "azertyuiop",
+    passwordConfirm: "azertyuiop",
   });
 
   const [error, setError] = React.useState("");
@@ -25,6 +25,7 @@ const RegisterPage = () => {
       ...credentials,
       [event.currentTarget.name]: value,
     });
+    console.log(credentials);
   };
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,16 +41,13 @@ const RegisterPage = () => {
       password: credentials.password,
       passwordConfirm: credentials.passwordConfirm,
     })
-      .then(() => {
+      .then((res) => {
         console.log(
-          credentials.username,
-          credentials.email,
-          credentials.password,
-          credentials.passwordConfirm
+          res
         );
         navigate("/login");
       })
-      .catch(() => console.log("ok euuuh .. error mek è_é"));
+      .catch((e) => console.log("ok euuuh .. error mek è_é", e));
   };
   return (
     <Menu
@@ -62,40 +60,43 @@ const RegisterPage = () => {
               </h1>
 
               <div className="block mb-2 text-sm">
-                <label className="pl-1 font-font">Username</label>
+                <label className="pl-1 font-font" htmlFor="username">Username</label>
                 <br></br>
                 <input
                   className="font-font placeholder:italic placeholder:text-slate-400 bg-grey w-full rounded-2xl leading-7 pl-1"
                   type="text"
                   placeholder="Pseudo..."
-                  value={credentials.email}
+                  name="username"
+                  value={credentials.username}
                   onChange={onChange}
                 />
               </div>
               <div className="block mb-2 text-sm">
-                <label className="pl-1 font-font">Email</label>
+                <label className="pl-1 font-font" htmlFor="email">Email</label>
                 <br></br>
                 <input
                   className="font-font placeholder:italic placeholder:text-slate-400 bg-grey w-full rounded-2xl leading-7 pl-1"
                   type="text"
                   placeholder="Adresse email..."
+                  name="email"
                   value={credentials.email}
                   onChange={onChange}
                 />
               </div>
               <div className="block mb-2 text-sm">
-                <label className="pl-1 font-font">Mot de passe </label>
+                <label className="pl-1 font-font" htmlFor="password">Mot de passe </label>
                 <br></br>
                 <input
                   className="font-font placeholder:italic placeholder:text-slate-400 bg-grey w-full rounded-2xl leading-7 pl-1"
                   type="password"
                   placeholder="Mot de passe..."
+                  name="password"
                   value={credentials.password}
                   onChange={onChange}
                 />
               </div>
               <div className="block mb-2 text-sm">
-                <label className="pl-1 font-font">
+                <label className="pl-1 font-font" htmlFor="passwordConfirm">
                   Confirmation du mot de passe
                 </label>
                 <br></br>
@@ -103,6 +104,7 @@ const RegisterPage = () => {
                   className="font-font placeholder:italic placeholder:text-slate-400 bg-grey w-full rounded-2xl leading-7 pl-1"
                   type="password"
                   placeholder="Confirmation du mot de passe..."
+                  name="passwordConfirm"
                   value={credentials.passwordConfirm}
                   onChange={onChange}
                 />
