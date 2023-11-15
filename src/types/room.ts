@@ -30,3 +30,8 @@ export type playCardPayload = {
   card: Card;
   playerId: string;
 };
+
+export type gamePayload = {
+  msg: string,
+  winner: string,
+}
