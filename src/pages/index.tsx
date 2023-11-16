@@ -31,7 +31,7 @@ const HomePage = () => {
           <img className="mt-5 h-64" src={BigLogo} alt="Logo du jeu" />
         </div>
         <div className="flex flex-col items-center">
-          <Link to={"/game"}>
+          <Link to={"/game-select"}>
             <button className="font-font italic font-black w-[500px] h-[100px] bg-gradient-to-b from-orange to-orange-clear uppercase text-3xl m-5 cursor-pointer text-white rounded-lg hover:bg-gradient-to-r">
               jouer
             </button>

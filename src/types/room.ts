@@ -17,7 +17,7 @@ export type RoomPayload = {
 
 export type Card = {
   id: number;
-  color: "red" | "blue" | "green" | "yellow";
+  color: "red" | "blue" | "green" | "yellow" | "black" |"wild";
   value: string;
   effect: string;
 };
