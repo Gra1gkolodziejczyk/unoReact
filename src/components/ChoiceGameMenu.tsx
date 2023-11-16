@@ -13,40 +13,7 @@ export const  ChoiceGameMenu = () => {
   const [open, setOpen] = useState(false);
 
   const context = useContext(WebsocketContext);
-
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log("connected");
-    });
-
-    socket.on("onRoomCreated", (room: RoomPayload) => {
-      console.log("roomCreated event received");
-      console.log(room);
-      context.setRoomName(room.room);
-      context.setParticipants(room.participants);
-      context.setPlayerCards({}); // Initialize player cards when the room is created
-    });
-
-    socket.on("onRoomJoined", (room: RoomPayload) => {
-      console.log("roomJoined event received");
-      console.log(room);
-      context.setRoomName(room.room);
-      context.setParticipants(room.participants);
-      context.setPlayerCards(room.playerCards || {}); // Ensure playerCards is initialized
-    });
-
-    socket.on("onParticipantUpdate", (room: RoomPayload) => {
-      console.log("updateParticipants event received");
-      console.log(room);
-      context.setParticipants(room.participants);
-    });
-
-    socket.on("onRoomJoinFailed", (room: RoomPayload) => {
-      console.log("roomJoinFailed event received");
-      console.log(room);
-      context.setError(room.msg);
-    });
-  }, [context]);
+  const { setRoomName, setParticipants, setPlayerCards }= useContext(WebsocketContext)
 
   const onCreateRoom = () => {
     socket.emit("createRoom");
