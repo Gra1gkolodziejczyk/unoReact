@@ -1,3 +1,7 @@
+⚠⚠ DEPRECRATED ⚠⚠
+
+Please go to this repo instead https://github.com/Gra1gkolodziejczyk/unoReact
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
