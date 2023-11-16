@@ -188,7 +188,11 @@ export default function WebSocketsProvider({
     console.log("context2:", roomName)
     console.log("context2:", playerCards)
     console.log("context2:", participants)
-  },[roomName, participants, playerCards])
+    console.log("context2:", pile)
+    console.log("context2:", messages)
+    console.log("context2:", turn)
+  
+  },[roomName, participants, playerCards, pile, messages, turn])
 
   return (
     <WebsocketContext.Provider

@@ -4,13 +4,13 @@ import {
 } from "../context/websocket/WebSocketContext";
 import { useContext, useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import Modal from "./modal";
-import { RoomPayload } from "../types/room";
 import { Menu } from "./menu";
 
 export const  ChoiceGameMenu = () => {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
 
   const context = useContext(WebsocketContext);
   const { setRoomName, setParticipants, setPlayerCards }= useContext(WebsocketContext)
@@ -21,7 +21,8 @@ export const  ChoiceGameMenu = () => {
 
   const onJoinRoom = () => {
     socket.emit("joinRoom", context.roomName);
-  };
+    navigate("/lobby")
+  }
 
 
   return (
@@ -52,9 +53,9 @@ export const  ChoiceGameMenu = () => {
                 type="text"
                 placeholder="lien de la room"
                 className="text-black"
-                value={context.roomValue}
+                value={context.roomName}
                 name="room"
-                onChange={(e) => context.setRoomValue(e.target.value)} />
+                onChange={(e) => context.setRoomName(e.target.value)} />
               <button>Join room</button>
             </form>}
             setShow={() => setOpen(true)} />

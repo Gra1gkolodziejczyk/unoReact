@@ -3,11 +3,17 @@ import '../assets/css/button.scss'
 import { Menu } from './menu';
 import { WebsocketContext, socket } from '../context/websocket/WebSocketContext';
 import { messagePayload, RoomPayload, cardsPayload, gamePayload, playCardPayload, Card } from '../types/room';
+import { Link } from 'react-router-dom';
 
 interface Props {}
 
 export const LobbyMenu: React.FC<Props> = () => {
   const context = useContext(WebsocketContext);
+  const roomName = useContext(WebsocketContext)
+
+  const handleStartGame = () => {
+    socket.emit("startGame", { roomName: roomName }); // Send startGame event with roomName in payload
+  };
 
  return(
 
@@ -25,7 +31,8 @@ export const LobbyMenu: React.FC<Props> = () => {
         <div className="flex font-font flex-col flex-1 pt-[35px]">
           <button className="button bg-orange text-[20px]">INVITER</button>
           <button className="button bg-orange text-[20px]">PARAMETRES</button>
-          <button className="button bg-orange text-[20px] mt-[95px] sm:mt-[215px] md:mt-[195px] xl:mt-[145px]">JOUER</button>
+          <button className="button bg-orange text-[20px] mt-[95px] sm:mt-[215px] md:mt-[195px] xl:mt-[145px]" onClick={() => handleStartGame()}>
+            <Link to={"/game"}> JOUER</Link></button>
         </div>
       </div>
     </div>
