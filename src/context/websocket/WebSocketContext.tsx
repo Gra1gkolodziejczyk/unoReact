@@ -9,7 +9,7 @@ import {
 
 import { io } from "socket.io-client";
 
-export const socket = io("http://localhost:9000");
+export const socket = io("http://51.83.42.138:9001");
 
 type WebSocketProviderType = {
   children: ReactNode;
@@ -68,8 +68,6 @@ export default function WebSocketsProvider({
   const [playerCards, setPlayerCards] = useState<Record<string, Card[]>>({});
   const [pile, setPile] = useState<Card[]>([]);
 
-  
-
   return (
     <WebsocketContext.Provider
       value={{
@@ -95,4 +93,3 @@ export default function WebSocketsProvider({
     </WebsocketContext.Provider>
   );
 }
-

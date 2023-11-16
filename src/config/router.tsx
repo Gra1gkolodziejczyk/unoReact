@@ -1,5 +1,5 @@
 // import GamePage from "../pages/game";
-import {ChoiceGameMenu} from "../components/ChoiceGameMenu";
+import { ChoiceGameMenu } from "../components/ChoiceGameMenu";
 import GamePage from "../pages/game";
 import HomePage from "../pages/index";
 import { LobbyPage } from "../pages/lobby";
