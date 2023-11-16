@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react';
 import '../assets/css/button.scss'
 import { Menu } from './menu';
 import { WebsocketContext, socket } from '../context/websocket/WebSocketContext';
-import { messagePayload, RoomPayload, cardsPayload, gamePayload, playCardPayload, Card } from '../types/room';
 import { Link } from 'react-router-dom';
 
 interface Props {}
