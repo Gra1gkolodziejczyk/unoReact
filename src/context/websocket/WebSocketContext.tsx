@@ -145,7 +145,7 @@ export default function WebSocketsProvider({
       setParticipants([]);
       setPlayerCards({});
       setPile([]);
-      setTurn("");
+      setTurn(""); // Reset turn
     });
 
     socket.on("onCardPlayed", (cards: playCardPayload) => {
