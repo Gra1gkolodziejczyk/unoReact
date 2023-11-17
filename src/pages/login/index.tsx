@@ -7,7 +7,7 @@ import { UserContext } from "../../context/auth/authContext";
 import { useContext } from "react";
 
 const LoginPage = () => {
-  const { setUser } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -35,7 +35,7 @@ const LoginPage = () => {
           username: res.data.username,
           email: res.data.email,
         });
-        console.log(res);
+        console.log(user);
         navigate("/");
       })
       .catch((err) => console.log(err));

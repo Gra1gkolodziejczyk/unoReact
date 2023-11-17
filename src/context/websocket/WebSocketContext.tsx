@@ -33,6 +33,10 @@ export interface WebSocketContextInterface {
   setPlayerCards: Dispatch<SetStateAction<Record<string, Card[]>>>;
   pile: Card[];
   setPile: Dispatch<SetStateAction<Card[]>>;
+  playerHandLength: Record<string, number>;
+  setPlayerHandLength: Dispatch<SetStateAction<Record<string, number>>>;
+  gameStarted: boolean;
+  setGameStarted: Dispatch<SetStateAction<boolean>>;
 }
 
 export const defaultWebSocket = {
@@ -44,6 +48,8 @@ export const defaultWebSocket = {
   messages: [],
   playerCards: {},
   pile: [],
+  playerHandLength: {},
+  gameStarted: false,
   setError: () => {},
   setTurn: () => {},
   setRoomValue: () => {},
@@ -52,6 +58,8 @@ export const defaultWebSocket = {
   setMessages: () => {},
   setPlayerCards: () => {},
   setPile: () => {},
+  setPlayerHandLength: () => {},
+  setGameStarted: () => {},
 } as WebSocketContextInterface;
 
 export const WebsocketContext = createContext(defaultWebSocket);
@@ -67,6 +75,8 @@ export default function WebSocketsProvider({
   const [roomName, setRoomName] = useState<string>("");
   const [messages, setMessages] = useState<messagePayload[]>([]);
   const [playerCards, setPlayerCards] = useState<Record<string, Card[]>>({});
+  const [playerHandLength, setPlayerHandLength] = useState<Record<string, number>>({});
+  const [gameStarted, setGameStarted] = useState<boolean>(false);
   const [pile, setPile] = useState<Card[]>([]);
 
   useEffect(() => {
@@ -86,11 +96,19 @@ export default function WebSocketsProvider({
       setRoomName(room.room);
       setParticipants(room.participants);
       setPlayerCards({}); // Initialize player cards when the room is created
+      setPlayerHandLength({}); // Initialize player hand length when the room is created
     });
 
     socket.on("onTurnUpdate", (room: RoomPayload) => {
       console.log("Turn updated:", room.turn);
+      console.log(room);
+    
+      if (typeof room.playerHandLength === 'object' && room.playerHandLength !== null) {
+        console.log("Received player hand length:", room.playerHandLength);
+        setPlayerHandLength(room.playerHandLength);
+      }     
       setTurn(room.turn);
+      console.log("Player hand length:", { playerHandLength });
     });
 
     socket.on("onRoomJoined", (room: RoomPayload) => {
@@ -165,10 +183,11 @@ export default function WebSocketsProvider({
       console.log("gameStart event received");
       console.log(pile);
       setPile(pile.cards);
+      setPlayerHandLength(pile.playerHandLength);
+      setGameStarted(true);
     });
 
     return () => {
-      console.log("disconnecting");
       socket.off("connect");
       socket.off("onMessage");
       socket.off("onRoomCreated");
@@ -185,12 +204,7 @@ export default function WebSocketsProvider({
   }, [socket]);
 
   useEffect(() => {
-    console.log("context2:", roomName)
-    console.log("context2:", playerCards)
-    console.log("context2:", participants)
-    console.log("context2:", pile)
-    console.log("context2:", messages)
-    console.log("context2:", turn)
+    console.log("participants", participants)
   
   },[roomName, participants, playerCards, pile, messages, turn])
 
@@ -213,6 +227,10 @@ export default function WebSocketsProvider({
         setPlayerCards,
         pile,
         setPile,
+        playerHandLength,
+        setPlayerHandLength,
+        gameStarted,
+        setGameStarted,
       }}
     >
       {children}

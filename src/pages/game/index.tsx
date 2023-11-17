@@ -17,14 +17,13 @@ export const GamePage = () => {
   };
 
   return (
-      <div className="h-screen bg-background">
+      <div className="h-screen w-full bg-background">
         <div>
-          <h1>Websocket component</h1>
-          <div>
+          <div className="flex flex-col">
             {context.error ? (
               <div>{ context.error }</div>
             ) : (
-              <div>
+              <div className="flex flex-col">
                 Participants in room: {Object.values(context.participants).join(", ")} - {Object.values(context.participants).length}/4
                 {context.turn && <div>Turn: {context.turn}</div>}
                 {context.turn === socket.id && <div><b>It's your turn to play!</b></div>}
@@ -40,13 +39,18 @@ export const GamePage = () => {
                 )}
                 {context.playerCards[socket.id ] && (
                   <div>
-                      Your Cards: 
+                      Vos cartes: 
                       <div className="flex">
                       {context.playerCards[socket.id].map((card, index) => (
                       <div key={index}  
                             onClick={() => playCard(card)}
-                            className="flex rounded-lg h-48 w-32 m-6 border bg-white hover:-translate-y-8 transition duration-500 ease-in-out">
-                          <div className="rounded-lg h-40  w-24 mt-4 ml-4 p-4" style={{ backgroundColor: card.color }}> <div className="h-full mx-auto bg-white" style={{borderRadius:'70% 30% 68% 32% / 71% 26% 74% 29%'}}>{card.value}</div> </div>
+                            className="flex rounded-lg h-48 w-32 ml-6 border bg-white hover:-translate-y-8 transition duration-500 ease-in-out">
+                          <div className="rounded-lg h-40  w-24 mt-4 ml-4 p-4" style={{ backgroundColor: card.color }}> 
+                            <div className="h-full mx-auto bg-white" style={{borderRadius:'70% 30% 68% 32% / 71% 26% 74% 29%'}}>{card.value}</div> 
+                            {['Wild', 'Wild Draw Four'].includes(card.value) && ['red', 'green', 'blue', 'yellow'].map(color => (
+                                  <button key={color} onClick={() => {card.color = color; playCard(card);}}>{color}</button>
+                              ))}
+                          </div>
                       </div>
                       ))}
                       </div>
